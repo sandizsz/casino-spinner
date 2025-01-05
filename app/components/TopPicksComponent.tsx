@@ -27,10 +27,10 @@ const TopPicksComponent = ({ casinos }: TopPicksComponentProps) => {
 
   // Define shapes for each category
   const shapes = [
-    <Hexagon className="w-6 h-6" />,
-    <Triangle className="w-6 h-6" />,
-    <Circle className="w-6 h-6" />,
-    <Square className="w-6 h-6" />
+    <Hexagon key="hexagon" className="w-6 h-6" />,
+    <Triangle key="triangle" className="w-6 h-6" />,
+    <Circle key="circle" className="w-6 h-6" />,
+    <Square key="square" className="w-6 h-6" />
   ];
 
   return (

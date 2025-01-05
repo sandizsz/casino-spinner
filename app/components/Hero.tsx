@@ -1,5 +1,5 @@
-import Link from "next/link";
-import { ArrowRight, Mail } from 'lucide-react';
+
+import { Mail } from 'lucide-react';
 
 export default function Hero() {
   return (

@@ -79,7 +79,7 @@ const CookieConsentBanner = () => {
           <div className="flex-1">
             <h3 className="text-lg font-display text-white mb-2">We value your privacy</h3>
             <p className="text-[#C0C0C0] text-sm">
-              We use cookies to enhance your browsing experience, serve personalized content, and analyze our traffic. By clicking "Accept All", you consent to our use of cookies.
+              We use cookies to enhance your browsing experience, serve personalized content, and analyze our traffic. By clicking &quot;Accept All&quot;, you consent to our use of cookies.
             </p>
           </div>
           <div className="flex flex-col sm:flex-row gap-3">
