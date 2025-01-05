@@ -30,7 +30,7 @@ export default async function CategoryPage() {
     <div className="min-h-screen bg-[#0D1117]">
       <AnimatedSection className="w-full py-20 bg-gradient-to-b from-[#1E2A44] to-[#0D1117] relative overflow-hidden">
         <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h1 className="text-4xl md:text-6xl font-['Orbitron'] font-bold text-center text-[#FFDD00] [text-shadow:_0_0_30px_#FFDD00] mb-12">
+          <h1 className="text-4xl md:text-6xl font-bold text-center text-[#FFDD00] [text-shadow:_0_0_30px_#FFDD00] mb-12">
             Casino Categories
           </h1>
           
@@ -43,7 +43,7 @@ export default async function CategoryPage() {
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-[#00A3FF] to-[#FFDD00] opacity-50 blur-lg group-hover:opacity-70 transition-opacity duration-300 rounded-lg"></div>
                 <div className="relative p-6 bg-[#1E2A44]/90 rounded-lg border border-[#00A3FF] shadow-[0_0_20px_rgba(0,163,255,0.3)] group-hover:shadow-[0_0_30px_rgba(0,163,255,0.5)] transition-all duration-300">
-                  <h2 className="text-2xl font-['Rajdhani'] font-bold text-[#FFDD00] group-hover:[text-shadow:_0_0_30px_#FFDD00] transition-all duration-300">
+                  <h2 className="text-2xl font-bold text-[#FFDD00] group-hover:[text-shadow:_0_0_30px_#FFDD00] transition-all duration-300">
                     {category.title}
                   </h2>
                   <div className="mt-4 text-[#C0C0C0] group-hover:text-white transition-colors duration-300">
@@ -55,7 +55,7 @@ export default async function CategoryPage() {
 
             {categories?.length === 0 && (
               <div className="col-span-full text-center p-12 bg-[#1E2A44]/50 rounded-lg border border-[#00A3FF] shadow-[0_0_20px_rgba(0,163,255,0.3)]">
-                <p className="text-xl font-['Rajdhani'] text-[#C0C0C0]">
+                <p className="text-xl text-[#C0C0C0]">
                   No categories available at the moment.
                 </p>
               </div>

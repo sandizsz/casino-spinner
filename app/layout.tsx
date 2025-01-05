@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
-import { Orbitron, Rajdhani } from 'next/font/google'
+import { Tenor_Sans, Archivo } from 'next/font/google';
 import "./globals.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -10,33 +9,23 @@ import LoadingOverlay from './components/LoadingOverlay'
 import { NavigationEvents } from './components/NavigationEvents'
 import { Suspense } from 'react'
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
+const displayFont = Archivo({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-space-grotesk',
+  weight: ['100', '400', '500', '600', '700'],
 });
 
-const orbitron = Orbitron({
+const bodyFont = Tenor_Sans({
+  weight: '400',
   subsets: ['latin'],
-  variable: '--font-orbitron',
   display: 'swap',
-})
-
-const rajdhani = Rajdhani({
-  subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'],
-  variable: '--font-rajdhani',
-  display: 'swap',
-})
+  variable: '--font-inter',
+});
 
 export const metadata: Metadata = {
-  title: "LocoBonus",
-  description: "Best offers 2024 by Locobonus",
+  title: 'Casino Spinner - Find Your Perfect Casino Match',
+  description: 'Discover the best online casinos tailored to your preferences. Compare bonuses, games, and features to find your ideal gaming destination.',
   icons: {
     icon: '/images/loco-bonus.ico',
   },
@@ -48,8 +37,14 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} ${orbitron.variable} ${rajdhani.variable} bg-[#0D1117] text-white min-h-screen`}>
+    <html lang="en" className={`${displayFont.variable} ${bodyFont.variable}`}>
+      <body style={{
+        fontFamily: 'var(--font-inter)',
+        background: '#0D1117',
+        color: 'white',
+        minHeight: '100vh',
+      }}
+      >
         <LoadingProvider>
           <Suspense>
             <NavigationEvents />

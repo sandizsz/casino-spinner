@@ -3,11 +3,11 @@ import Image from "next/image";
 
 export default function Footer() {
   return (
-    <footer className="w-full bg-[#1A1A1A] text-white border-t border-[#FF1745]/20 backdrop-blur-sm">
+    <footer className="bg-[#1A1A1A] border-t border-[#FF1745]/20">
       {/* Legal Links */}
       <div className="border-b border-[#FF1745]/20">
         <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex flex-wrap justify-center gap-8 text-sm text-[#C0C0C0]">
+          <div className="flex flex-wrap justify-center gap-8 text-sm text-body text-[#C0C0C0]">
             <Link href="/privacy-policy" className="hover:text-[#FF1745] transition-colors duration-300">
               Privacy Policy
             </Link>
@@ -78,7 +78,7 @@ export default function Footer() {
       {/* Copyright */}
       <div className="border-t border-[#FF1745]/20">
         <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-4">
-          <p className="text-center text-sm text-[#C0C0C0]">
+          <p className="text-center text-sm text-body text-[#C0C0C0]">
             Copyright {new Date().getFullYear()} GambleStrike. All rights reserved.
           </p>
         </div>

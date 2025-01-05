@@ -120,7 +120,7 @@ const CasinoComponent: React.FC<CasinoProps> = ({ casino, index, categorySlug })
                 className="object-cover rounded"
               />
             </div>
-            <h3 className="text-sm font-semibold text-white">
+            <h3 className="text-sm text-display font-semibold text-white">
               {casino.offerTitle}
             </h3>
           </div>
@@ -128,8 +128,8 @@ const CasinoComponent: React.FC<CasinoProps> = ({ casino, index, categorySlug })
           {/* Rating Display */}
           <div className="flex flex-col items-end">
             <div className="flex items-center gap-1 mb-1">
-              <span className="text-sm text-gray-400">Score:</span>
-              <span className="text-sm font-medium text-[#FF1745]">{getScoreText(casino.rating)}</span>
+              <span className="text-sm text-body text-gray-400">Score:</span>
+              <span className="text-sm text-display font-medium text-[#FF1745]">{getScoreText(casino.rating)}</span>
             </div>
             <div className="w-[80px] h-[50px]">
               <GaugeComponent
@@ -183,7 +183,7 @@ const CasinoComponent: React.FC<CasinoProps> = ({ casino, index, categorySlug })
 
         {/* Position Number */}
         <div className="z-10 absolute -top-px -left-px w-9 h-9 flex items-center justify-center bg-[#FF1745] rounded-tl-lg rounded-br-lg border-r-2 border-b-2 border-[#FF1745] shadow-[4px_4px_20px_rgba(255,23,69,0.3)]">
-          <span className="font-['Orbitron'] font-bold text-[12px] text-white [text-shadow:_0_0_10px_rgba(255,255,255,0.5)]">
+          <span className="font-bold text-[12px] text-white [text-shadow:_0_0_10px_rgba(255,255,255,0.5)]">
             #{casino.orderRank || index + 1}
           </span>
         </div>
@@ -192,15 +192,10 @@ const CasinoComponent: React.FC<CasinoProps> = ({ casino, index, categorySlug })
         <div className="relative mt-4 px-2" ref={dropdownRef}>
           <button
             onClick={() => setIsPaymentDropdownOpen(!isPaymentDropdownOpen)}
-            className="w-full px-4 py-2 text-left bg-[#2B2B2B] text-white rounded-lg hover:bg-[#363636] transition-colors duration-200 flex items-center justify-between"
+            className="w-full flex items-center justify-between px-4 py-2 bg-[#2B2B2B] rounded text-sm text-display text-white hover:bg-[#363636] transition-colors"
           >
-            <span className="flex items-center gap-2">
-              <Wallet className="w-5 h-5" />
-              Payment Methods
-            </span>
-            <ChevronDown 
-              className={`w-5 h-5 transition-transform duration-200 ${isPaymentDropdownOpen ? 'transform rotate-180' : ''}`}
-            />
+            <span>Payment Methods</span>
+            <ChevronDown className={`w-4 h-4 transition-transform ${isPaymentDropdownOpen ? 'rotate-180' : ''}`} />
           </button>
           
           {mounted && isPaymentDropdownOpen && createPortal(
@@ -238,9 +233,19 @@ const CasinoComponent: React.FC<CasinoProps> = ({ casino, index, categorySlug })
 
         {/* Main Bonus Content */}
         <div className="flex-grow p-4">
-          <p className="text-gray-300 text-center">
-            {casino.offerDescription}
-          </p>
+          <div className="space-y-4">
+            <div className="flex items-start gap-2">
+              <Wallet className="w-5 h-5 text-[#FF1745] mt-0.5" />
+              <div>
+                <h4 className="font-heading text-sm font-medium text-white mb-1">
+                  Welcome Bonus
+                </h4>
+                <p className="text-sm font-sans text-gray-400">
+                  {casino.offerDescription}
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* CTA Button and T&Cs */}

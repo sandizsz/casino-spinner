@@ -1,126 +1,47 @@
 import type { Config } from "tailwindcss";
-import type { PluginAPI } from 'tailwindcss/types/config';
 
-export default {
-  darkMode: ["class"],
+const config: Config = {
   content: [
-    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    './pages/**/*.{js,ts,jsx,tsx,mdx}',
+    './components/**/*.{js,ts,jsx,tsx,mdx}',
+    './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
     extend: {
-      keyframes: {
-        shine: {
-          '0%': { transform: 'translateX(-100%)' },
-          '100%': { transform: 'translateX(100%)' }
-        },
-        'spin-slow': {
-          '0%': { transform: 'rotate(0deg)' },
-          '100%': { transform: 'rotate(360deg)' }
-        }
+      fontFamily: {
+        sans: ['var(--font-inter)'],
+        heading: ['var(--font-space-grotesk)'],
       },
       animation: {
-        shine: 'shine 2s infinite',
-        'spin-slow': 'spin-slow 20s linear infinite'
+        'float': 'float 6s ease-in-out infinite',
+        'float-delayed': 'float 6s ease-in-out infinite 2s',
+        'spin-slow': 'spin 8s linear infinite',
+        'spin-slow-reverse': 'spin 8s linear infinite reverse',
+        'orbit': 'orbit 20s linear infinite',
+        'orbit-delayed': 'orbit 20s linear infinite 5s',
+        'orbit-delayed-2': 'orbit 20s linear infinite 10s',
+        'orbit-delayed-3': 'orbit 20s linear infinite 15s',
+        'pulse': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
       },
-      typography: {
-        DEFAULT: {
-          css: {
-            color: '#9CA3AF',
-            h2: {
-              color: '#FF1745',
-              textShadow: '0 0 30px #FF1745',
-            },
-            h4: {
-              color: '#FF1745',
-              fontSize: '1.25rem',
-              fontWeight: '600',
-              marginTop: '1.5rem',
-              marginBottom: '1rem',
-            },
-            p: {
-              color: '#9CA3AF',
-            },
-            ul: {
-              color: '#9CA3AF',
-            },
-            ol: {
-              color: '#9CA3AF',
-            },
-            strong: {
-              color: 'white',
-            },
-            dt: {
-              color: 'white',
-              fontWeight: '600',
-              marginTop: '1rem',
-            },
-            dd: {
-              color: '#9CA3AF',
-              marginLeft: '1.5rem',
-              marginBottom: '0.5rem',
-            },
-            a: {
-              color: '#FF1745',
-              '&:hover': {
-                color: '#D90429',
-              },
-            },
-          },
+      keyframes: {
+        float: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-20px)' },
         },
-      },
-      borderRadius: {
-        lg: 'var(--radius)',
-        md: 'calc(var(--radius) - 2px)',
-        sm: 'calc(var(--radius) - 4px)'
-      },
-      colors: {
-        background: 'hsl(var(--background))',
-        foreground: 'hsl(var(--foreground))',
-        card: {
-          DEFAULT: 'hsl(var(--card))',
-          foreground: 'hsl(var(--card-foreground))'
+        orbit: {
+          '0%': { transform: 'rotate(0deg) translateX(150px) rotate(0deg)' },
+          '100%': { transform: 'rotate(360deg) translateX(150px) rotate(-360deg)' },
         },
-        popover: {
-          DEFAULT: 'hsl(var(--popover))',
-          foreground: 'hsl(var(--popover-foreground))'
+        pulse: {
+          '0%, 100%': { opacity: '1', transform: 'scale(1)' },
+          '50%': { opacity: '.9', transform: 'scale(0.98)' },
         },
-        primary: {
-          DEFAULT: 'hsl(var(--primary))',
-          foreground: 'hsl(var(--primary-foreground))'
-        },
-        secondary: {
-          DEFAULT: 'hsl(var(--secondary))',
-          foreground: 'hsl(var(--secondary-foreground))'
-        },
-        muted: {
-          DEFAULT: 'hsl(var(--muted))',
-          foreground: 'hsl(var(--muted-foreground))'
-        },
-        accent: {
-          DEFAULT: 'hsl(var(--accent))',
-          foreground: 'hsl(var(--accent-foreground))'
-        },
-        destructive: {
-          DEFAULT: 'hsl(var(--destructive))',
-          foreground: 'hsl(var(--destructive-foreground))'
-        },
-        border: 'hsl(var(--border))',
-        input: 'hsl(var(--input))',
-        ring: 'hsl(var(--ring))',
-        chart: {
-          '1': 'hsl(var(--chart-1))',
-          '2': 'hsl(var(--chart-2))',
-          '3': 'hsl(var(--chart-3))',
-          '4': 'hsl(var(--chart-4))',
-          '5': 'hsl(var(--chart-5))'
-        }
       },
     },
   },
   plugins: [
     require('@tailwindcss/typography'),
-    require("tailwindcss-animate")
   ],
-} satisfies Config;
+}
+
+export default config;
