@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import Image from "next/image";
 import { TypedObject } from '@portabletext/types'
-import GaugeComponent from 'react-gauge-component'
+import { PortableText } from '@portabletext/react';
 import { Wallet, ChevronDown } from 'lucide-react'
 import { createPortal } from 'react-dom'
 import ClaimButton from './ClaimButton';
@@ -97,180 +97,107 @@ const CasinoComponent: React.FC<CasinoProps> = ({ casino, index, categorySlug })
     }
   }, [mounted, isPaymentDropdownOpen]);
 
-  // Helper function to get score text based on rating
-  const getScoreText = (rating: number) => {
-    if (rating >= 9.0) return 'Excellent';
-    if (rating >= 4.0) return 'Great';
-    if (rating >= 3.5) return 'Very Good';
-    if (rating >= 3.0) return 'Good';
-    return 'Fair';
-  };
+ 
 
   return (
-    <div className="relative group h-full flex-grow">
-      <div className="relative bg-[#1E1E1E] rounded-xl overflow-hidden flex flex-col h-full">
-        {/* Header with Casino Name and Rating */}
-        <div className="flex items-center justify-between p-2 pb-8 bg-[#2B2B2B]">
-          <div className="flex items-center gap-2">
-            <div className="relative w-20 h-20">
-              <Image
-                src={casino.imageUrl}
-                alt={casino.offerTitle}
-                fill
-                className="object-cover rounded"
-              />
-            </div>
-            <h3 className="text-sm text-display font-semibold text-white">
-              {casino.offerTitle}
-            </h3>
-          </div>
-          
-          {/* Rating Display */}
-          <div className="flex flex-col items-end">
-            <div className="flex items-center gap-1 mb-1">
-              <span className="text-sm text-body text-gray-400">Score:</span>
-              <span className="text-sm text-display font-medium text-[#FF1745]">{getScoreText(casino.rating)}</span>
-            </div>
-            <div className="w-[80px] h-[50px]">
-              <GaugeComponent
-                id={`gauge-${casino._id}`}
-                type="semicircle"
-                arc={{
-                  colorArray: ['#FF1745'],
-                  subArcs: [{
-                    limit: 10,
-                    color: '#2B2B2B',
-                    showTick: true
-                  }],
-                  width: 0.2,
-                  padding: 0.02,
-                  cornerRadius: 1
-                }}
-                pointer={{
-                  type: "arrow",
-                  color: '#FFF',
-                  length: 10,
-                  width: 40,
-                  elastic: true
-                }}
-                value={casino.rating}
-                minValue={0}
-                maxValue={10}
-                labels={{
-                  valueLabel: {
-                    formatTextValue: value => value.toFixed(1),
-                    style: { 
-                      fontSize: "80px",
-                      fill: "#ffffff",
-                    }
-                  },
-                  tickLabels: {
-                    hideMinMax: true,
-                    ticks: [],
-                    defaultTickValueConfig: {
-                      hide: true
-                    },
-                    defaultTickLineConfig: {
-                      hide: true
-                    }
-                  }
-                }}
-                style={{ width: "100%", height: "100%" }}
-              />
-            </div>
-          </div>
-        </div>
+    <div className="relative w-full bg-black/90 border border-cyan-500/20 rounded-lg p-6 mb-4 hover:border-cyan-400/40 transition-all duration-300 group overflow-hidden">
+    {/* Animated scan lines */}
+    <div className="absolute inset-0">
+      {[...Array(3)].map((_, i) => (
+        <div
+          key={i}
+          className="absolute bg-gradient-to-r from-transparent via-cyan-500/20 to-transparent h-px w-[200%] opacity-30"
+          style={{
+            top: `${30 * i}%`,
+            left: '-50%',
+            animation: `scan ${3 + i}s linear infinite`
+          }}
+        />
+      ))}
+    </div>
 
-        {/* Position Number */}
-        <div className="z-10 absolute -top-px -left-px w-9 h-9 flex items-center justify-center bg-[#FF1745] rounded-tl-lg rounded-br-lg border-r-2 border-b-2 border-[#FF1745] shadow-[4px_4px_20px_rgba(255,23,69,0.3)]">
-          <span className="font-bold text-[12px] text-white [text-shadow:_0_0_10px_rgba(255,255,255,0.5)]">
-            #{casino.orderRank || index + 1}
-          </span>
+    {/* Main content */}
+    <div className="flex items-center gap-8 relative z-10">
+      {/* Logo with glow effect */}
+      <div className="relative w-48 h-48 flex-shrink-0">
+        <div className="absolute inset-0 bg-cyan-500/10 rounded-lg blur-xl animate-pulse"></div>
+        <div className="relative h-full w-full bg-black/40 rounded-lg border border-cyan-500/20 p-4">
+          <Image
+            src={casino.imageUrl}
+            alt={casino.offerTitle}
+            fill
+            className="object-contain p-2"
+          />
+          {/* Corner accents */}
+          <div className="absolute -top-px -left-px w-4 h-4 border-t border-l border-cyan-500/40" />
+          <div className="absolute -bottom-px -right-px w-4 h-4 border-b border-r border-cyan-500/40" />
         </div>
-
-        {/* Payment Methods Dropdown */}
-        <div className="relative mt-4 px-2" ref={dropdownRef}>
-          <button
-            onClick={() => setIsPaymentDropdownOpen(!isPaymentDropdownOpen)}
-            className="w-full flex items-center justify-between px-4 py-2 bg-[#2B2B2B] rounded text-sm text-display text-white hover:bg-[#363636] transition-colors"
-          >
-            <span>Payment Methods</span>
-            <ChevronDown className={`w-4 h-4 transition-transform ${isPaymentDropdownOpen ? 'rotate-180' : ''}`} />
-          </button>
-          
-          {mounted && isPaymentDropdownOpen && createPortal(
-            <div 
-              className="absolute bg-[#2B2B2B] border border-[#FF1745]/10 rounded-lg shadow-lg z-[40]"
-              style={{
-                top: `${dropdownPosition.top}px`,
-                left: `${dropdownPosition.left}px`,
-                width: `${dropdownPosition.width}px`,
-              }}
-            >
-              <div className="p-2 grid grid-cols-2 gap-2 max-h-[300px] overflow-y-auto">
-                {casino.paymentMethods.map((method) => (
-                  <div
-                    key={method._id}
-                    className="px-3 py-2 text-sm text-white hover:bg-[#363636] cursor-pointer rounded flex items-center gap-2"
-                  >
-                    {method.image?.asset?.url && (
-                      <Image
-                        src={method.image.asset.url}
-                        alt={method.name}
-                        width={20}
-                        height={20}
-                        className="object-contain flex-shrink-0"
-                      />
-                    )}
-                    <span className="truncate">{method.name}</span>
-                  </div>
-                ))}
-              </div>
-            </div>,
-            document.body
-          )}
-        </div>
-
-        {/* Main Bonus Content */}
-        <div className="flex-grow p-4">
-          <div className="space-y-4">
-            <div className="flex items-start gap-2">
-              <Wallet className="w-5 h-5 text-[#FF1745] mt-0.5" />
-              <div>
-                <h4 className="font-heading text-sm font-medium text-white mb-1">
-                  Welcome Bonus
-                </h4>
-                <p className="text-sm font-sans text-gray-400">
-                  {casino.offerDescription}
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* CTA Button and T&Cs */}
-        <div className="mt-auto flex flex-col gap-2">
-          {casino.termsConditionsUrl && (
-            <div className="text-center">
-              <a
-                href={casino.termsConditionsUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-xs text-gray-400 hover:text-[#FF1745] transition-colors"
-              >
-                T&Cs Apply
-              </a>
-            </div>
-          )}
-         <ClaimButton 
-              offerUrl={casino.offerUrl}
-              offerTitle={casino.offerTitle}
-              categorySlug={categorySlug}
-              categoryUrls={casino.categoryUrls}
-            />
+        
+        {/* Rank indicator */}
+        <div className="absolute -top-2 -right-2 w-8 h-8 bg-black border border-cyan-500/40 rounded flex items-center justify-center">
+          <span className="text-cyan-500 text-sm">#{casino.orderRank || index + 1}</span>
         </div>
       </div>
+
+      {/* Casino info with vertical accent */}
+      <div className="flex-grow border-l-2 border-cyan-500/20 pl-8 space-y-2">
+        <h3 className="text-xl text-white group-hover:text-cyan-400 transition-colors">
+          {casino.offerTitle}
+        </h3>
+        <p className="text-gray-400 text-sm max-w-xl">
+          {casino.offerDescription}
+        </p>
+        
+        {/* Offer Text */}
+        <div className="text-gray-300 text-sm mt-2">
+          <div className="[&>ul]:list-disc [&>ul]:ml-4 [&>ul]:space-y-1">
+            <PortableText value={casino.offerText} />
+          </div>
+        </div>
+        
+        {/* Payment methods grid */}
+        <div className="flex gap-2 mt-4">
+          {casino.paymentMethods
+            .filter(method => method.image?.asset?.url)
+            .slice(0, 5)
+            .map((method) => (
+            <div
+              key={method._id}
+              className="relative w-10 h-10 bg-black/60 rounded p-1.5 border border-cyan-500/20 group/method"
+            >
+              <Image
+                src={method.image.asset.url}
+                alt={method.name}
+                fill
+                className="object-contain p-1"
+              />
+              <div className="absolute inset-0 flex items-center justify-center bg-black/90 opacity-0 group-hover/method:opacity-100 transition-opacity rounded">
+                <span className="text-[10px] text-cyan-400 text-center px-1">{method.name}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* CTA section */}
+      <div className="flex-shrink-0 w-48 flex flex-col items-center gap-3">
+        <ClaimButton 
+          offerUrl={casino.offerUrl}
+          offerTitle={casino.offerTitle}
+          categorySlug={categorySlug}
+          categoryUrls={casino.categoryUrls}
+        />
+        <a
+          href={casino.termsConditionsUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-xs text-cyan-400/60 hover:text-cyan-400 transition-colors text-center"
+        >
+          T&Cs Apply
+        </a>
+      </div>
     </div>
+  </div>
   );
 }
 

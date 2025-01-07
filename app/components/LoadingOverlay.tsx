@@ -29,8 +29,8 @@ export default function LoadingOverlay() {
               className="relative w-32 h-32"
             >
               <Image
-                src="/images/loco-bonus.png"
-                alt="GambleStrike Logo"
+                src="/images/spinnertop.png"
+                alt="Spinnertop Logo"
                 fill
                 className="object-contain"
               />
@@ -47,7 +47,7 @@ export default function LoadingOverlay() {
                   repeat: Infinity,
                   delay: 0
                 }}
-                className="w-3 h-3 bg-[#D90429] rounded-full"
+                className="w-3 h-3 bg-[#00E6FF] rounded-full"
               />
               <motion.div
                 animate={{
@@ -59,7 +59,7 @@ export default function LoadingOverlay() {
                   repeat: Infinity,
                   delay: 0.2
                 }}
-                className="w-3 h-3 bg-[#D90429] rounded-full"
+                className="w-3 h-3 bg-[#00E6FF] rounded-full"
               />
               <motion.div
                 animate={{
@@ -71,7 +71,7 @@ export default function LoadingOverlay() {
                   repeat: Infinity,
                   delay: 0.4
                 }}
-                className="w-3 h-3 bg-[#D90429] rounded-full"
+                className="w-3 h-3 bg-[#00E6FF] rounded-full"
               />
             </div>
           </div>

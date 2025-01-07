@@ -1,4 +1,3 @@
-
 import { Mail } from 'lucide-react';
 
 export default function Hero() {
@@ -89,16 +88,16 @@ export default function Hero() {
               <div className="absolute inset-0">
                 {/* Casino Elements */}
                 <div className="absolute top-1/4 left-1/4 w-32 h-32">
-                  <div className="w-full h-full bg-gradient-to-br from-[#00E6FF] to-[#0056FF] rounded-2xl shadow-lg animate-float"></div>
+                  <div className="w-full h-full bg-gradient-to-br from-[#00E6FF] to-[#0056FF] rounded-2xl shadow-[0_0_30px_rgba(0,230,255,0.5)] border border-[#00E6FF]/50 backdrop-blur-sm animate-float"></div>
                 </div>
                 <div className="absolute top-1/2 right-1/4 w-40 h-40">
-                  <div className="w-full h-full bg-gradient-to-br from-[#00E6FF] to-[#0056FF] rounded-full shadow-lg animate-float-delayed"></div>
+                  <div className="w-full h-full bg-gradient-to-br from-[#00E6FF] to-[#0056FF] rounded-full shadow-[0_0_30px_rgba(0,230,255,0.5)] border border-[#00E6FF]/50 backdrop-blur-sm animate-float-delayed"></div>
                 </div>
                 <div className="absolute bottom-1/4 left-1/3 w-36 h-36">
-                  <div className="w-full h-full bg-gradient-to-br from-[#00E6FF] to-[#0056FF] rounded-lg shadow-lg animate-bounce"></div>
+                  <div className="w-full h-full bg-gradient-to-br from-[#00E6FF] to-[#0056FF] rounded-lg shadow-[0_0_30px_rgba(0,230,255,0.5)] border border-[#00E6FF]/50 backdrop-blur-sm animate-bounce"></div>
                 </div>
                 <div className="absolute bottom-1/3 right-1/3 w-28 h-28">
-                  <div className="w-full h-full bg-gradient-to-br from-[#00E6FF] to-[#0056FF] rounded-xl shadow-lg animate-float"></div>
+                  <div className="w-full h-full bg-gradient-to-br from-[#00E6FF] to-[#0056FF] rounded-xl shadow-[0_0_30px_rgba(0,230,255,0.5)] border border-[#00E6FF]/50 backdrop-blur-sm animate-float"></div>
                 </div>
               </div>
             </div>
