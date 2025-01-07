@@ -3,12 +3,20 @@ import CasinoComponent from "@/app/components/CasinoComponent";
 import AnimatedSection from "@/app/components/AnimatedSection";
 import { Casino } from '@/app/utils/interface';
 
-
+interface Category {
+  _id: string;
+  title: string;
+  slug: {
+    current: string;
+  };
+  description: string;
+}
 
 interface PageProps {
   params: {
     slug: string;
   };
+  searchParams?: { [key: string]: string | string[] | undefined };
 }
 
 async function getCasinosByCategory(slug: string) {
@@ -47,7 +55,7 @@ async function getCasinosByCategory(slug: string) {
   return data;
 }
 
-async function getCategory(slug: string) {
+async function getCategory(slug: string): Promise<Category> {
   const query = `*[_type == "category" && slug.current == "${slug}"][0] {
     _id,
     title,
@@ -63,7 +71,7 @@ export const revalidate = 60;
 
 export default async function CategoryPage({ params }: PageProps) {
   const casinos = await getCasinosByCategory(params.slug);
-  const category = await getCategory(params.slug);
+  const category: Category = await getCategory(params.slug);
 
   return (
     <div className="min-h-screen bg-[#0D0D0D] text-white">
