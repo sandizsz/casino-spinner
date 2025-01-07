@@ -13,9 +13,9 @@ interface Category {
 }
 
 interface PageProps {
-  params: Promise<{
+  params: {
     slug: string;
-  }>;
+  };
 }
 
 async function getCasinosByCategory(slug: string) {
@@ -49,77 +49,73 @@ async function getCasinosByCategory(slug: string) {
       }
     }
   }`;
+
   const data = await client.fetch(query);
-  return data as Casino[];
+  return data;
 }
 
 async function getCategory(slug: string) {
   const query = `*[_type == "category" && slug.current == "${slug}"][0] {
     _id,
     title,
-    description,
-    slug
+    slug,
+    description
   }`;
 
   const data = await client.fetch(query);
-  return data as Category;
+  return data;
 }
 
 export const revalidate = 60;
 
 export default async function CategoryPage({ params }: PageProps) {
-  const parameters = await params;
-  const slug = parameters.slug;
-  const category = await getCategory(slug);
+  const casinos = await getCasinosByCategory(params.slug);
+  const category = await getCategory(params.slug);
 
-  if (!category) {
-    return (
-      <div className="min-h-screen from-[#1A1A1A] to-[#0D0D0D] flex items-center justify-center">
-        <p className="text-white">Category not found</p>
-      </div>
-    );
-  }
-
-  const casinos: Casino[] = await getCasinosByCategory(slug);
-  
   return (
-    <div className="min-h-screen from-[#1A1A1A] to-[#0D0D0D]">
-      <AnimatedSection className="w-full py-20 bg-gradient-to-b from-[#1A1A1A] to-[#0D0D0D] relative overflow-hidden">
-        <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h1 className="text-4xl md:text-6xl font-bold text-center text-[#FF1745] [text-shadow:_0_0_30px_#FF1745] mb-12">
-            {category.title}
-          </h1>
-          {category.description && (
-            <div className="max-w-4xl mx-auto mb-12">
-              <p className="text-[#C0C0C0] text-lg text-center leading-relaxed">
-                {category.description}
-              </p>
-            </div>
-          )}
-          <div className="space-y-6">
-            <div className="grid md:grid-cols-3 gap-6">
-              {casinos?.map((casino, index) => (
-                <div key={casino._id} className="md:col-span-1">
-                  <AnimatedSection>
-                    <CasinoComponent 
-                      casino={casino} 
-                      index={index} 
-                      categorySlug={slug}  // Pass the category slug
-                    />
-                  </AnimatedSection>
+    <div className="min-h-screen bg-[#0D0D0D] text-white">
+      <main className="relative">
+   
+
+        {/* Casino List Section */}
+        <AnimatedSection className="w-full py-20 bg-[#0D0D0D]">
+          <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="relative mb-16 text-center">
+              {/* Background glow effect */}
+              <div className="absolute inset-0 blur-3xl bg-gradient-to-r from-cyan-500/20 via-transparent to-cyan-500/20 opacity-30" />
+              
+              {/* Section title with cyberpunk accents */}
+              <div className="relative">
+                <div className="inline-flex items-center gap-2 text-cyan-400 mb-4">
+                  <div className="w-12 h-[2px] bg-cyan-400"></div>
+                  <span className="text-sm font-mono uppercase tracking-[0.2em]">SpinnerTop Selection</span>
+                  <div className="w-12 h-[2px] bg-cyan-400"></div>
                 </div>
-              ))}
-            </div>
-            {(!casinos || casinos.length === 0) && (
-              <div className="text-center p-12 bg-[#1E2A44]/50 rounded-lg border border-[#00A3FF] shadow-[0_0_20px_rgba(0,163,255,0.3)]">
-                <p className="text-xl text-[#C0C0C0]">
-                  No casinos found in this category yet.
+                
+                <h1 className="text-5xl lg:text-6xl font-display mb-4 text-white">
+                  <span className="text-cyan-400">{category.title}</span> 
+                </h1>
+                
+                <p className="text-gray-400 max-w-2xl mx-auto">
+                  {category.description}
+                
                 </p>
               </div>
-            )}
+            </div>
+
+            <div className="grid gap-6">
+              {casinos.map((casino: Casino, index: number) => (
+                <CasinoComponent
+                  key={casino._id}
+                  casino={casino}
+                  index={index}
+                  categorySlug={params.slug}
+                />
+              ))}
+            </div>
           </div>
-        </div>
-      </AnimatedSection>
+        </AnimatedSection>
+      </main>
     </div>
   );
 }
