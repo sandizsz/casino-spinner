@@ -2,7 +2,7 @@ import { client } from "@/sanity/lib/client";
 import { Category, Casino } from "../utils/interface";
 import { NavbarClient } from "./NavbarClient";
 
-async function getCategories() {
+async function getCategories(): Promise<Category[]> {
   const query = `*[_type == "category"] | order(_updatedAt desc) {
     title,
     slug,
@@ -12,7 +12,7 @@ async function getCategories() {
   return await client.fetch(query, {}, { next: { revalidate: 60 } });
 }
 
-async function getCasinos() {
+async function getCasinos(): Promise<Casino[]> {
   const query = `*[_type == "casino"] | order(orderRank)[0...10] {
     _id,
     offerTitle,

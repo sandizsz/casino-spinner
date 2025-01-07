@@ -12,6 +12,60 @@ const config: Config = {
         sans: ['var(--font-inter)'],
         heading: ['var(--font-space-grotesk)'],
       },
+      typography: {
+        DEFAULT: {
+          css: {
+            color: '#9CA3AF', // text-gray-400
+            h1: {
+              color: '#FFFFFF',
+              fontWeight: '700',
+            },
+            h2: {
+              color: '#FFFFFF',
+              fontWeight: '600',
+              marginTop: '2rem',
+              marginBottom: '1rem',
+            },
+            h3: {
+              color: '#FFFFFF',
+              fontWeight: '600',
+              marginTop: '1.5rem',
+              marginBottom: '0.75rem',
+            },
+            strong: {
+              color: '#FFFFFF',
+            },
+            a: {
+              color: '#00E6FF',
+              '&:hover': {
+                color: '#33EBFF',
+              },
+            },
+            blockquote: {
+              color: '#9CA3AF',
+              borderLeftColor: '#00E6FF',
+            },
+            code: {
+              color: '#00E6FF',
+            },
+            'code::before': {
+              content: '""',
+            },
+            'code::after': {
+              content: '""',
+            },
+            'ul > li::before': {
+              backgroundColor: '#00E6FF',
+            },
+            'ol > li::before': {
+              color: '#00E6FF',
+            },
+            hr: {
+              borderColor: '#374151',
+            },
+          },
+        },
+      },
       animation: {
         'float': 'float 6s ease-in-out infinite',
         'float-delayed': 'float 6s ease-in-out infinite 2s',

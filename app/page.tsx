@@ -9,10 +9,8 @@ import { crapsData } from "./data/pages/craps";
 import { slotsData } from "./data/pages/onlineslots";
 import { rouletteData } from "./data/pages/roulette";
 import { baccaratData } from "./data/pages/baccarat";
-import { casinoGuidesData } from "./data/pages/guides";
-import PaymentMethods from './components/PaymentMethods';
 import Hero from './components/Hero';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Dices, Gamepad2, Coins, Joystick, Trophy, Target, Dice1 } from 'lucide-react';
 import Link from "next/link";
 import ContentPromo from './components/ContentPromo';
 
@@ -64,12 +62,6 @@ export const revalidate = 60;
 
 export default async function Home() {
   const casinos: Casino[] = (await getPosts()).slice(0, 16);
-  const uniquePaymentMethods = Array.from(
-    new Map(
-      casinos.flatMap(casino => casino.paymentMethods || [])
-        .map(method => [method._id, method])
-    ).values()
-  );
 
   const guides = [
     blackjackData,
@@ -188,8 +180,67 @@ export default async function Home() {
             <div className="absolute bottom-0 left-1/4 w-[700px] h-[700px] rounded-full bg-[#00E6FF] opacity-[0.12] blur-[150px]"></div>
           </div>
 
-         {/* Responsible Gaming Section */}
-         <AnimatedSection className="w-full pt-20 pb-40 relative">
+          {/* Casino Guides Section */}
+          <AnimatedSection className="w-full py-20 relative">
+            <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
+              <div className="relative mb-16 text-center">
+                <div className="inline-flex items-center gap-2 text-[#00E6FF] mb-4">
+                  <div className="w-12 h-[2px] bg-[#00E6FF]"></div>
+                  <span className="text-sm font-mono uppercase tracking-[0.2em]">Casino Guides</span>
+                  <div className="w-12 h-[2px] bg-[#00E6FF]"></div>
+                </div>
+                
+                <h2 className="text-4xl font-display mb-4 text-white">
+                  Master Your Casino Games
+                </h2>
+                
+                <p className="text-gray-400 max-w-2xl mx-auto text-lg">
+                  Learn strategies and tips for popular casino games. From beginner guides to advanced techniques.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {guides.map((guide, index) => {
+                  const icons = [Dices, Gamepad2, Coins, Joystick, Trophy, Target, Dice1];
+                  const Icon = icons[index % icons.length];
+                  
+                  return (
+                    <Link 
+                      key={index}
+                      href={`/${guide.slug}`}
+                      className="group relative bg-black/60 border border-[#00E6FF]/20 rounded-lg p-6 transition-all duration-300 hover:border-[#00E6FF]/40"
+                    >
+                      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#00E6FF]/5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity" />
+                      
+                      <div className="flex items-start gap-4">
+                        <div className="p-3 rounded-lg bg-[#00E6FF]/5 border border-[#00E6FF]/20">
+                          <Icon className="w-6 h-6 text-[#00E6FF]" />
+                        </div>
+                        
+                        <div className="flex-1">
+                          <h3 className="text-xl font-display text-white mb-2 group-hover:text-[#00E6FF] transition-colors">
+                            {guide.title}
+                          </h3>
+                          
+                          <p className="text-gray-400 text-sm mb-4">
+                            {guide.description}
+                          </p>
+                          
+                          <div className="flex items-center text-[#00E6FF] text-sm">
+                            Learn More
+                            <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                          </div>
+                        </div>
+                      </div>
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
+          </AnimatedSection>
+
+          {/* Responsible Gaming Section */}
+          <AnimatedSection className="w-full pt-20 pb-40 relative">
           <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="flex flex-col lg:flex-row items-center gap-12">
               <div className="flex-1 space-y-6">
@@ -252,9 +303,8 @@ export default async function Home() {
           </div>
         </AnimatedSection>
 
-
-         {/* Casino Terms & Conditions Guide */}
-         <AnimatedSection className="w-full py-20 -mt-20 relative">
+        {/* Casino Terms & Conditions Guide */}
+        <AnimatedSection className="w-full py-20 -mt-20 relative">
         <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="text-center mb-16">
               <div className="flex items-center justify-center gap-2 text-[#00E6FF] mb-4">
@@ -371,81 +421,7 @@ export default async function Home() {
           </div>
         </AnimatedSection>
 
-        {/* Popular Casino Games Section */}
-        <AnimatedSection className="w-full py-20 -mt-20 relative">
-          {/* Grid Background */}
-          <div className="absolute inset-0 opacity-5">
-            <div className="absolute inset-0" style={{
-              backgroundImage: 'linear-gradient(45deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px), linear-gradient(-45deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px)',
-              backgroundSize: '30px 30px'
-            }}></div>
-          </div>
-          
-          {/* Glow Effects */}
-          <div className="absolute inset-0">
-            <div className="absolute inset-0 opacity-20">
-              <div className="absolute w-[500px] h-[500px] rounded-full bg-[#00E6FF] blur-[150px] -top-32 -left-24"></div>
-              <div className="absolute w-[400px] h-[400px] rounded-full bg-[#00E6FF] blur-[120px] bottom-0 right-24"></div>
-            </div>
-          </div>
-
-          <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
-            <div className="text-center mb-16">
-              <div className="flex items-center justify-center gap-2 text-[#00E6FF] mb-4">
-                <div className="w-12 h-[2px] bg-[#00E6FF]"></div>
-                <span className="text-sm font-mono uppercase tracking-[0.2em]">Popular Games</span>
-                <div className="w-12 h-[2px] bg-[#00E6FF]"></div>
-              </div>
-              <h2 className="text-4xl font-display text-white mb-6">Top Casino Games</h2>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              <div className="group relative overflow-hidden rounded-xl bg-black/40 backdrop-blur-sm border border-gray-800 hover:border-[#00E6FF] transition-all duration-300">
-                <div className="aspect-square relative">
-                  <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent z-10"></div>
-                  <div className="absolute inset-0 bg-[url('/images/slots.jpg')] bg-cover bg-center group-hover:scale-110 transition-transform duration-300"></div>
-                  <div className="absolute bottom-0 left-0 right-0 p-4 z-20">
-                    <h3 className="text-xl font-display text-white mb-1">Slots</h3>
-                    <p className="text-sm text-gray-300">Classic & Video Slots</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="group relative overflow-hidden rounded-xl bg-black/40 backdrop-blur-sm border border-gray-800 hover:border-[#00E6FF] transition-all duration-300">
-                <div className="aspect-square relative">
-                  <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent z-10"></div>
-                  <div className="absolute inset-0 bg-[url('/images/blackjack.jpg')] bg-cover bg-center group-hover:scale-110 transition-transform duration-300"></div>
-                  <div className="absolute bottom-0 left-0 right-0 p-4 z-20">
-                    <h3 className="text-xl font-display text-white mb-1">Blackjack</h3>
-                    <p className="text-sm text-gray-300">Live & Virtual Tables</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="group relative overflow-hidden rounded-xl bg-black/40 backdrop-blur-sm border border-gray-800 hover:border-[#00E6FF] transition-all duration-300">
-                <div className="aspect-square relative">
-                  <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent z-10"></div>
-                  <div className="absolute inset-0 bg-[url('/images/roulette.jpg')] bg-cover bg-center group-hover:scale-110 transition-transform duration-300"></div>
-                  <div className="absolute bottom-0 left-0 right-0 p-4 z-20">
-                    <h3 className="text-xl font-display text-white mb-1">Roulette</h3>
-                    <p className="text-sm text-gray-300">European & American</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="group relative overflow-hidden rounded-xl bg-black/40 backdrop-blur-sm border border-gray-800 hover:border-[#00E6FF] transition-all duration-300">
-                <div className="aspect-square relative">
-                  <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent z-10"></div>
-                  <div className="absolute inset-0 bg-[url('/images/poker.jpg')] bg-cover bg-center group-hover:scale-110 transition-transform duration-300"></div>
-                  <div className="absolute bottom-0 left-0 right-0 p-4 z-20">
-                    <h3 className="text-xl font-display text-white mb-1">Poker</h3>
-                    <p className="text-sm text-gray-300">Texas Hold'em & More</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </AnimatedSection>
+    
 
         {/* Casino Tips Section */}
         <AnimatedSection className="w-full py-20 -mt-20 relative">

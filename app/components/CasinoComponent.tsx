@@ -1,11 +1,9 @@
 "use client"
 
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import Image from "next/image";
 import { TypedObject } from '@portabletext/types'
 import { PortableText } from '@portabletext/react';
-import { Wallet, ChevronDown } from 'lucide-react'
-import { createPortal } from 'react-dom'
 import ClaimButton from './ClaimButton';
 
 interface Category {
@@ -55,49 +53,11 @@ interface CasinoProps {
 }
 
 const CasinoComponent: React.FC<CasinoProps> = ({ casino, index, categorySlug }) => {
-  const dropdownRef = useRef<HTMLDivElement>(null);
-  const [isPaymentDropdownOpen, setIsPaymentDropdownOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
-  const [dropdownPosition, setDropdownPosition] = useState({ top: 0, left: 0, width: 0 });
 
   useEffect(() => {
     setMounted(true);
   }, []);
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        setIsPaymentDropdownOpen(false);
-      }
-    };
-
-    const updateDropdownPosition = () => {
-      if (dropdownRef.current && isPaymentDropdownOpen) {
-        const rect = dropdownRef.current.getBoundingClientRect();
-        const scrollY = window.scrollY;
-        setDropdownPosition({
-          top: rect.bottom + scrollY + 8,
-          left: rect.left,
-          width: rect.width,
-        });
-      }
-    };
-
-    if (mounted) {
-      document.addEventListener('mousedown', handleClickOutside);
-      window.addEventListener('scroll', updateDropdownPosition);
-      window.addEventListener('resize', updateDropdownPosition);
-      updateDropdownPosition();
-      
-      return () => {
-        document.removeEventListener('mousedown', handleClickOutside);
-        window.removeEventListener('scroll', updateDropdownPosition);
-        window.removeEventListener('resize', updateDropdownPosition);
-      };
-    }
-  }, [mounted, isPaymentDropdownOpen]);
-
- 
 
   return (
     <div className="relative w-full bg-black/90 border border-cyan-500/20 rounded-lg p-6 mb-4 hover:border-cyan-400/40 transition-all duration-300 group overflow-hidden">

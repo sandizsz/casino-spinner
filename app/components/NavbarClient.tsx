@@ -3,13 +3,13 @@
 import Link from "next/link"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
-import { Category } from "../utils/interface"
+import { Category, Casino } from "../utils/interface"
 import { useState } from "react"
 import { GiftIcon } from "./GiftIcon"
 
 interface NavbarClientProps {
   categories: Category[]
-  casinos: any[]
+  casinos: Casino[]
 }
 
 export function NavbarClient({ categories, casinos }: NavbarClientProps) {
