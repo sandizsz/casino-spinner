@@ -70,7 +70,7 @@ export default async function Page({ params }: PageProps) {
         </div>
       </div>
 
-      <div className="container mx-auto px-4 py-24 relative z-10">
+      <AnimatedSection className="container mx-auto px-4 py-24 relative z-10">
         <div className="max-w-4xl mx-auto">
           <div className="space-y-6">
             <div className="flex items-center gap-2 text-[#00E6FF]">
@@ -122,7 +122,7 @@ export default async function Page({ params }: PageProps) {
             />
           </div>
         </div>
-      </div>
+      </AnimatedSection>
     </div>
   );
 }

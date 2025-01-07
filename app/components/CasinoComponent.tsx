@@ -53,11 +53,7 @@ interface CasinoProps {
 }
 
 const CasinoComponent: React.FC<CasinoProps> = ({ casino, index, categorySlug }) => {
-  const [mounted, setMounted] = useState(false);
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   return (
     <div className="relative w-full bg-black/90 border border-cyan-500/20 rounded-lg p-6 mb-4 hover:border-cyan-400/40 transition-all duration-300 group overflow-hidden">
