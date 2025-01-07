@@ -81,7 +81,7 @@ export default function Footer() {
       <div className="border-t border-[#00E6FF]/50 bg-[#00E6FF]/[0.08]">
         <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-4">
           <p className="text-center text-sm text-[#00E6FF]">
-            Copyright {new Date().getFullYear()} SpinnerTop. All rights reserved.
+            Copyright {new Date().getFullYear()} SpinnerTOP. All rights reserved.
           </p>
         </div>
       </div>
