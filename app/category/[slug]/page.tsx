@@ -3,15 +3,6 @@ import CasinoComponent from "@/app/components/CasinoComponent";
 import AnimatedSection from "@/app/components/AnimatedSection";
 import { Casino } from '@/app/utils/interface';
 
-interface Category {
-  _id: string;
-  title: string;
-  slug: {
-    current: string;
-  };
-  description: string;
-}
-
 interface PageProps {
   params: Promise<{
     slug: string;
