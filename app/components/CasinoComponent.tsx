@@ -4,7 +4,7 @@ import Image from "next/image";
 import { TypedObject } from '@portabletext/types'
 import { PortableText } from '@portabletext/react';
 import ClaimButton from './ClaimButton';
-import { Sparkles, Shield, Flame, ThumbsUp, Gift, Zap, Trophy, Star, Timer } from 'lucide-react';
+import { Sparkles, Shield, Flame, ThumbsUp } from 'lucide-react';
 
 interface Category {
   _id: string;

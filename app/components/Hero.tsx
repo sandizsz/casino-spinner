@@ -96,7 +96,7 @@ export default function Hero() {
                   </form>
                   {isSubmitted && (
                     <p className="text-sm text-[#00E6FF] font-medium">
-                      Thank you for subscribing! We'll keep you updated with the latest news.
+                      Thank you for subscribing! We&apos;ll keep you updated with the latest news.
                     </p>
                   )}
                   <p className="text-sm text-gray-400">
