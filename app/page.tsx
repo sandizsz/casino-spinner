@@ -76,11 +76,7 @@ export default async function Home() {
   return (
     <div className="min-h-screen bg-[#0D0D0D] text-white">
       <main className="relative">
-
-
         <Hero />
-
-        
 
         {/* Casino List Section */}
         <AnimatedSection className="w-full py-20 bg-[#0D0D0D]">
@@ -369,10 +365,10 @@ export default async function Home() {
           </div>
           
           {/* Glow Effects */}
-          <div className="absolute inset-0">
-            <div className="absolute inset-0 opacity-20">
-              <div className="absolute w-[600px] h-[600px] rounded-full bg-[#00E6FF] blur-[150px] top-1/2 -translate-y-1/2 right-0"></div>
-              <div className="absolute w-[400px] h-[400px] rounded-full bg-[#00E6FF] blur-[120px] -bottom-32 -left-24"></div>
+          <div className="absolute inset-0 w-full">
+            <div className="absolute inset-0 opacity-20 w-full">
+              <div className="absolute w-[300px] sm:w-[600px] h-[300px] sm:h-[600px] rounded-full bg-[#00E6FF] blur-[100px] sm:blur-[150px] top-1/2 -translate-y-1/2 right-0"></div>
+              <div className="absolute w-[200px] sm:w-[400px] h-[200px] sm:h-[400px] rounded-full bg-[#00E6FF] blur-[80px] sm:blur-[120px] -bottom-32 -left-12 sm:-left-24"></div>
             </div>
           </div>
 

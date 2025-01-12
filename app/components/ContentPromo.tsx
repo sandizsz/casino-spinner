@@ -19,7 +19,7 @@ export default function ContentPromo({ title, description, link }: ContentPromoP
       </div>
       
       {/* Content */}
-      <div className="relative z-10 flex items-center justify-between">
+      <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 md:gap-4">
         {/* Text content */}
         <div className="space-y-2">
           <h3 className="text-xl text-cyan-400 font-bold">{title}</h3>
@@ -29,7 +29,7 @@ export default function ContentPromo({ title, description, link }: ContentPromoP
         {/* CTA Button */}
         <Link 
           href={link}
-          className="group relative bg-black/60 border border-cyan-500/40 text-cyan-400 px-6 py-2 rounded-lg transition-all duration-300 hover:scale-105 hover:border-cyan-400 flex items-center gap-2"
+          className="group relative bg-black/60 border border-cyan-500/40 text-cyan-400 px-6 py-2 rounded-lg transition-all duration-300 hover:scale-105 hover:border-cyan-400 flex items-center gap-2 w-full md:w-auto justify-center md:justify-start"
         >
           <span className="relative z-10 font-mono tracking-wider text-sm">READ MORE</span>
           <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

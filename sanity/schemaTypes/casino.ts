@@ -30,12 +30,6 @@ export const casinoType = defineType({
       type: 'text',
     },
     {
-      name: 'rating',
-      title: 'Rating',
-      type: 'number',
-      validation: (Rule) => Rule.min(0).max(10),
-    },
-    {
       name: 'offerUrl',
       title: 'Default Offer URL',
       type: 'url',

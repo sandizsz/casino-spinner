@@ -24,10 +24,10 @@ const bodyFont = Tenor_Sans({
 });
 
 export const metadata: Metadata = {
-  title: 'Casino Spinner - Find Your Perfect Casino Match',
+  title: 'SpinnerTOP - Find Your Perfect Casino Match',
   description: 'Discover the best online casinos tailored to your preferences. Compare bonuses, games, and features to find your ideal gaming destination.',
   icons: {
-    icon: '/images/loco-bonus.ico',
+    icon: '/images/spinnertop.ico',
   },
 };
 
@@ -38,7 +38,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${displayFont.variable} ${bodyFont.variable}`}>
-      <body style={{
+      <body className="overflow-x-hidden" style={{
         fontFamily: 'var(--font-inter)',
         background: '#0D1117',
         color: 'white',

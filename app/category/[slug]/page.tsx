@@ -30,6 +30,11 @@ async function getCasinosByCategory(slug: string) {
       title,
       slug
     },
+    tags[]-> {
+      _id,
+      title,
+      slug
+    },
     paymentMethods[]-> {
       _id,
       name,

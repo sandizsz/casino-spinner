@@ -1,8 +1,37 @@
+'use client';
+
 import { Mail } from 'lucide-react';
+import { useState } from 'react';
 
 export default function Hero() {
+  const [email, setEmail] = useState('');
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      const response = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ 
+          email,
+          recipientEmail: 'darkijs5@gmail.com' 
+        }),
+      });
+      
+      if (response.ok) {
+        setIsSubmitted(true);
+        setEmail('');
+      }
+    } catch (error) {
+      console.error('Error submitting email:', error);
+    }
+  };
+
   return (
-    <section className="relative w-full bg-[#0A0A0A] overflow-hidden flex items-start md:items-center py-8 md:py-12 lg:py-8">
+    <section className="relative w-full bg-[#0A0A0A] overflow-x-hidden flex items-start md:items-center py-8 md:py-12 lg:py-8">
       {/* Grid Background */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute inset-0" style={{
@@ -12,10 +41,10 @@ export default function Hero() {
       </div>
 
       {/* Dynamic background effects */}
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 overflow-hidden">
         <div className="absolute inset-0 opacity-20">
-          <div className="absolute w-[600px] h-[600px] rounded-full bg-[#00E6FF] blur-[180px] -top-32 -right-24 animate-float"></div>
-          <div className="absolute w-[500px] h-[500px] rounded-full bg-[#00E6FF] blur-[150px] bottom-0 -left-24 animate-float-delayed"></div>
+          <div className="absolute w-[300px] sm:w-[600px] h-[300px] sm:h-[600px] rounded-full bg-[#00E6FF] blur-[120px] sm:blur-[180px] -top-32 -right-12 sm:-right-24 animate-float"></div>
+          <div className="absolute w-[250px] sm:w-[500px] h-[250px] sm:h-[500px] rounded-full bg-[#00E6FF] blur-[100px] sm:blur-[150px] bottom-0 -left-12 sm:-left-24 animate-float-delayed"></div>
         </div>
       </div>
 
@@ -47,36 +76,32 @@ export default function Hero() {
                     <Mail className="w-5 h-5 text-[#00E6FF]" />
                     <span className="text-white font-display">Subscribe to Newsletter</span>
                   </div>
-                  <div className="flex flex-col sm:flex-row gap-3">
+                  <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
                     <div className="flex-1 relative">
                       <input 
                         type="email" 
                         placeholder="Enter your email" 
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
                         className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-[#00E6FF]/50 focus:ring-1 focus:ring-[#00E6FF]/50 transition-all"
                       />
                     </div>
-                    <button className="px-6 py-3 bg-[#00E6FF] text-black font-medium rounded-lg hover:shadow-lg hover:shadow-[#00E6FF]/20 transition-all duration-300 whitespace-nowrap">
+                    <button 
+                      type="submit"
+                      className="px-6 py-3 bg-[#00E6FF] text-black font-medium rounded-lg hover:shadow-lg hover:shadow-[#00E6FF]/20 transition-all duration-300 whitespace-nowrap"
+                    >
                       Subscribe Now
                     </button>
-                  </div>
+                  </form>
+                  {isSubmitted && (
+                    <p className="text-sm text-[#00E6FF] font-medium">
+                      Thank you for subscribing! We'll keep you updated with the latest news.
+                    </p>
+                  )}
                   <p className="text-sm text-gray-400">
                     Get exclusive bonus offers and latest casino news.
                   </p>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-3 gap-4 md:gap-8 pt-6 md:pt-8 border-t border-white/10">
-                <div>
-                  <div className="text-2xl md:text-4xl font-display text-[#00E6FF]">3000+</div>
-                  <div className="text-sm md:text-base text-gray-400 mt-1">Games</div>
-                </div>
-                <div>
-                  <div className="text-2xl md:text-4xl font-display text-[#00E6FF]">10min</div>
-                  <div className="text-sm md:text-base text-gray-400 mt-1">Fast Payouts</div>
-                </div>
-                <div>
-                  <div className="text-2xl md:text-4xl font-display text-[#00E6FF]">24/7</div>
-                  <div className="text-sm md:text-base text-gray-400 mt-1">Live Support</div>
                 </div>
               </div>
             </div>

@@ -48,10 +48,10 @@ export function GiftIcon({ casinos = [] }: GiftIconProps) {
       {isOpen && randomCasino && (
         <>
           <div 
-            className="fixed inset-0 bg-black/80 backdrop-blur-sm z-40"
+            className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[60]"
             onClick={() => setIsOpen(false)}
           />
-          <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[90%] max-w-2xl bg-black/90 border border-cyan-500/20 rounded-lg p-8 z-50">
+          <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[90%] max-w-2xl bg-black/90 border border-cyan-500/20 rounded-lg p-4 md:p-8 z-[70]">
             {/* Corner accents */}
             <div className="absolute -top-px -left-px w-4 h-4 border-t border-l border-cyan-500/40" />
             <div className="absolute -top-px -right-px w-4 h-4 border-t border-r border-cyan-500/40" />
@@ -80,8 +80,8 @@ export function GiftIcon({ casinos = [] }: GiftIconProps) {
               <span className="text-cyan-500 hover:text-cyan-400">✕</span>
             </button>
             
-            <div className="relative z-10 flex items-center gap-8">
-              <div className="relative w-48 h-48 flex-shrink-0">
+            <div className="relative z-10 flex flex-col md:flex-row items-center md:items-start gap-4 md:gap-8">
+              <div className="relative w-40 h-40 md:w-64 md:h-64 flex-shrink-0">
                 <div className="absolute inset-0 bg-cyan-500/10 rounded-lg blur-xl animate-pulse"></div>
                 <div className="relative h-full w-full bg-black/40 rounded-lg border border-cyan-500/20 p-4">
                   <Image
@@ -93,21 +93,29 @@ export function GiftIcon({ casinos = [] }: GiftIconProps) {
                 </div>
               </div>
 
-              <div className="flex-grow border-l-2 border-cyan-500/20 pl-8 space-y-4">
-                <h3 className="text-xl text-white group-hover:text-cyan-400 transition-colors">
+              <div className="flex-grow border-t-2 md:border-t-0 md:border-l-2 border-cyan-500/20 pt-4 md:pt-0 md:pl-8 space-y-4 w-full md:w-auto text-center md:text-left">
+                <h3 className="text-lg md:text-xl text-white group-hover:text-cyan-400 transition-colors">
                   {randomCasino.offerTitle}
                 </h3>
                 <p className="text-gray-400 text-sm">
                   {randomCasino.offerDescription}
                 </p>
-                <a
-                  href={randomCasino.offerUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-block bg-black border border-cyan-500/40 text-cyan-500 px-8 py-3 rounded-lg hover:border-cyan-400/60 hover:text-cyan-400 transition-all duration-300"
-                >
-                  Claim Bonus
-                </a>
+                <div className="flex flex-col sm:flex-row items-center gap-4 justify-center md:justify-start">
+                  <a
+                    href={randomCasino.offerUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full sm:w-auto bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-400 px-6 py-2 rounded-lg transition-all duration-300 text-center"
+                  >
+                    Play
+                  </a>
+                  <button
+                    onClick={() => setIsOpen(false)}
+                    className="w-full sm:w-auto border border-cyan-500/20 hover:border-cyan-500/40 text-cyan-400 px-6 py-2 rounded-lg transition-all duration-300 text-center"
+                  >
+                    Maybe Later
+                  </button>
+                </div>
               </div>
             </div>
           </div>
