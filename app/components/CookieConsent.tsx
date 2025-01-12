@@ -1,11 +1,17 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import CookieConsent from 'react-cookie-consent';
 import Link from 'next/link';
 
 const CookieConsentBanner = () => {
-  const [showBanner, setShowBanner] = useState(true);
+  const [showBanner, setShowBanner] = useState(false);  // Initialize as false to prevent flash
+
+  useEffect(() => {
+    // Check if the cookie exists
+    const hasConsent = document.cookie.split(';').some(item => item.trim().startsWith('casino_cookie_consent='));
+    setShowBanner(!hasConsent);
+  }, []);
 
   const handleAccept = () => {
     setShowBanner(false);
