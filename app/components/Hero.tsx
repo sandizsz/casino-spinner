@@ -9,6 +9,7 @@ export default function Hero() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    console.log('Submitting form with email:', email);
     try {
       const response = await fetch('/api/subscribe', {
         method: 'POST',
@@ -21,9 +22,15 @@ export default function Hero() {
         }),
       });
       
+      const data = await response.json();
+      console.log('Response:', data);
+      
       if (response.ok) {
         setIsSubmitted(true);
         setEmail('');
+      } else {
+        console.error('Error response:', data);
+        alert('Failed to subscribe. Please try again.');
       }
     } catch (error) {
       console.error('Error submitting email:', error);

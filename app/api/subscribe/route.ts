@@ -1,37 +1,52 @@
 import { NextResponse } from 'next/server';
-import { MailerSend, EmailParams, Sender, Recipient } from 'mailersend';
+import nodemailer from 'nodemailer';
 
 export async function POST(request: Request) {
   try {
     const { email, recipientEmail } = await request.json();
+    console.log('Received subscription request:', { email, recipientEmail });
 
-    const mailerSend = new MailerSend({
-      apiKey: process.env.MAILERSEND_API_KEY || '',
+    if (!email || !recipientEmail) {
+      console.log('Missing required fields');
+      return NextResponse.json(
+        { error: 'Email and recipient email are required' },
+        { status: 400 }
+      );
+    }
+
+    // Create a transporter using Zoho
+    const transporter = nodemailer.createTransport({
+      host: 'smtp.zoho.com',
+      port: 465,
+      secure: true, // use SSL
+      auth: {
+        user: process.env.ZOHO_MAIL,
+        pass: process.env.ZOHO_PASSWORD
+      }
     });
 
-    const sentFrom = new Sender('noreply@your-domain.com', 'SpinnerTop Newsletter');
-    const recipients = [
-      new Recipient(recipientEmail, 'SpinnerTop Admin')
-    ];
-
-    const emailParams = new EmailParams()
-      .setFrom(sentFrom)
-      .setTo(recipients)
-      .setSubject('New Newsletter Subscription')
-      .setHtml(`
+    // Email options
+    const mailOptions = {
+      from: process.env.ZOHO_MAIL,
+      to: recipientEmail,
+      subject: 'New Newsletter Subscription',
+      html: `
         <h2>New Newsletter Subscription</h2>
         <p>A new user has subscribed to the newsletter:</p>
         <p><strong>Email:</strong> ${email}</p>
-      `)
-      .setText(`New subscription from: ${email}`);
+      `
+    };
 
-    await mailerSend.email.send(emailParams);
+    // Send email
+    console.log('Sending email...');
+    await transporter.sendMail(mailOptions);
+    console.log('Email sent successfully');
 
     return NextResponse.json({ success: true });
   } catch (error) {
-    console.error('Error sending email:', error);
+    console.error('Detailed error:', error);
     return NextResponse.json(
-      { error: 'Failed to process subscription' },
+      { error: 'Failed to process subscription', details: error },
       { status: 500 }
     );
   }
