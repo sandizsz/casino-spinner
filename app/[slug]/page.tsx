@@ -12,7 +12,7 @@ import { slotsData } from '../data/pages/onlineslots';
 import { kenoData } from '../data/pages/keno';
 import { crapsData } from '../data/pages/craps';
 import { privacyPolicyData, disclaimerData, termsConditionsData, cookiePolicyData } from '../data/pages/legal';
-import { casinoGuidesData, gamblingAdviceData, } from '../data/pages/guides';
+import { casinoGuidesData, gamblingAdviceData, depositMethodsData, casinoGameTypesData, casinoTipsTricksData } from '../data/pages/guides';
 
 
 // Combine all page data
@@ -29,6 +29,9 @@ const pages: PageData[] = [
   cookiePolicyData,
   casinoGuidesData,
   gamblingAdviceData,
+  casinoGameTypesData,
+  depositMethodsData,
+  casinoTipsTricksData,
   slotsData
 ];
 

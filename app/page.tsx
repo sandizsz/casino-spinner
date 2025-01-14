@@ -13,6 +13,7 @@ import Hero from './components/Hero';
 import { ArrowRight, Dices, Gamepad2, Coins, Joystick, Trophy, Target, Dice1 } from 'lucide-react';
 import Link from "next/link";
 import ContentPromo from './components/ContentPromo';
+import CasinoCarousel from './components/CasinoCarousel';
 
 async function getPosts() {
   const query = `*[_type == "casino"] | order(orderRank)[0...50] {
@@ -114,9 +115,9 @@ export default async function Home() {
                     <div key={`${casino._id}-section-1`}>
                       <CasinoComponent casino={casino} index={index} />
                       <ContentPromo 
-                        title="Master Online Gambling"
-                        description="Learn essential strategies and tips for successful online casino gaming."
-                        link="/gambling-advice"
+                        title="Safe Casino Deposits"
+                        description="Explore secure payment methods for online casino gaming."
+                        link="/deposit-methods"
                       />
                     </div>
                   );
@@ -126,9 +127,9 @@ export default async function Home() {
                     <div key={`${casino._id}-section-2`}>
                       <CasinoComponent casino={casino} index={index} />
                       <ContentPromo 
-                        title="Payment Methods Guide"
-                        description="Discover secure payment options and transaction guides for online casinos."
-                        link="/payment-methods"
+                        title="Casino Game Types"
+                        description="Explore a diverse range of casino games, from classic slots to modern video poker."
+                        link="/casino-game-types"
                       />
                     </div>
                   );
@@ -138,9 +139,9 @@ export default async function Home() {
                     <div key={`${casino._id}-section-3`}>
                       <CasinoComponent casino={casino} index={index} />
                       <ContentPromo 
-                        title="Responsible Gaming Tips"
-                        description="Stay in control with our comprehensive responsible gaming guidelines."
-                        link="/responsible-gaming"
+                        title="Casino Tips & Tricks"
+                        description="Improve your gaming experience with our curated tips and tricks."
+                        link="/casino-tips-tricks"
                       />
                     </div>
                   );
@@ -150,7 +151,7 @@ export default async function Home() {
             </div>
 
             <div className="flex justify-center mt-12">
-              <Link href="/category/all-bonuses" className="group relative bg-black/60 border-2 border-cyan-500/40 text-cyan-400 px-8 py-3 rounded-lg transition-all duration-300 hover:scale-105 hover:border-cyan-400 overflow-hidden">
+              <Link href="/category/all-casinos" className="group relative bg-black/60 border-2 border-cyan-500/40 text-cyan-400 px-8 py-3 rounded-lg transition-all duration-300 hover:scale-105 hover:border-cyan-400 overflow-hidden">
                 <div className="absolute inset-0 bg-cyan-400/10 opacity-0 group-hover:opacity-100 transition-opacity" />
                 <div className="absolute h-[2px] w-full bg-gradient-to-r from-transparent via-cyan-400/40 to-transparent -translate-y-6 group-hover:translate-y-6 transition-transform duration-700" />
                 <span className="relative z-10 flex items-center gap-2 font-mono tracking-wider">
@@ -297,7 +298,13 @@ export default async function Home() {
               </div>
             </div>
           </div>
+          <div className="w-full pt-20 relative">
+          <CasinoCarousel casinos={casinos.slice(0, 10)} />
+          </div>
+         
         </AnimatedSection>
+
+  
 
         {/* Casino Terms & Conditions Guide */}
         <AnimatedSection className="w-full py-20 -mt-20 relative">
@@ -416,8 +423,6 @@ export default async function Home() {
             </div>
           </div>
         </AnimatedSection>
-
-    
 
         {/* Casino Tips Section */}
         <AnimatedSection className="w-full py-20 -mt-20 relative">

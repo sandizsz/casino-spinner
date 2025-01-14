@@ -37,7 +37,7 @@ export default function Footer() {
                 className="h-8 w-auto object-contain brightness-125"
               />
             </Link>
-            <Link href="" className="hover:scale-105 transition-transform duration-300">
+            <Link href="https://www.gamblingcommission.gov.uk" className="hover:scale-105 transition-transform duration-300">
               <Image 
                 src="/images/Image1.png" 
                 alt="Gambling Awareness Logo 1"
