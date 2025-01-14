@@ -7,7 +7,6 @@ import Autoplay from 'embla-carousel-autoplay';
 import { Casino } from '../utils/interface';
 import Image from 'next/image';
 import { Sparkles, Shield, Flame, ThumbsUp, ExternalLink } from 'lucide-react';
-import { PortableText } from '@portabletext/react';
 import ClaimButton from './ClaimButton';
 import Link from 'next/link';
 import { useDotButton } from './EmblaCarouselDotButton';
