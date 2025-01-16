@@ -18,7 +18,7 @@ export default function Hero() {
         },
         body: JSON.stringify({ 
           email,
-          recipientEmail: 'darkijs5@gmail.com' 
+          recipientEmail: 'marketing@spinnertop.com' 
         }),
       });
       
@@ -67,13 +67,13 @@ export default function Hero() {
               </div>
               
               <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display text-display-bold leading-tight">
-                <span className="text-white">Play</span>
-                <span className="text-[#00E6FF] ml-2 md:ml-4">Win</span>
-                <span className="text-white ml-2 md:ml-4">Repeat</span>
+                <span className="text-white">The</span>
+                <span className="text-[#00E6FF] ml-2 md:ml-4">thrill</span>
+                <span className="text-white ml-2 md:ml-4">of a lifetime</span>
               </h1>
 
               <p className="text-lg sm:text-xl text-gray-400 leading-relaxed max-w-xl">
-                Experience the thrill of next-generation casino gaming with instant payouts and VIP treatment.
+                Experience the thrill of next-generation casino games with fast payouts and electrifying experiences.
               </p>
 
               {/* Newsletter Subscription */}

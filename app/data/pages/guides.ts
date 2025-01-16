@@ -959,7 +959,7 @@ export const casinoGameTypesData = {
 export const casinoTipsTricksData = {
   slug: "casino-tips-tricks",
   title: "Casino Tips & Tricks",
-  image: "/images/tips-tricks.webp",
+  image: "/images/tips-tricks.jpg",
   description: "A comprehensive guide to popular casino games, their rules, and strategies to improve your gameplay experience.",
   content: ` <h1>Casino Tips & Tricks:</h1>
 

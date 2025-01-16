@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import nodemailer from 'nodemailer';
+import { MailerSend, EmailParams, Sender, Recipient } from "mailersend";
 
 export async function POST(request: Request) {
   try {
@@ -14,32 +14,27 @@ export async function POST(request: Request) {
       );
     }
 
-    // Create a transporter using Zoho
-    const transporter = nodemailer.createTransport({
-      host: 'smtp.zoho.com',
-      port: 465,
-      secure: true, // use SSL
-      auth: {
-        user: process.env.ZOHO_MAIL,
-        pass: process.env.ZOHO_PASSWORD
-      }
+    const mailerSend = new MailerSend({
+      apiKey: process.env.MAILERSEND_API_KEY || '',
     });
 
-    // Email options
-    const mailOptions = {
-      from: process.env.ZOHO_MAIL,
-      to: recipientEmail,
-      subject: 'New Newsletter Subscription',
-      html: `
+    const sentFrom = new Sender("your-sandbox@sandbox.mailersend.net", "SpinnerTop");
+    const recipients = [
+      new Recipient(recipientEmail, "SpinnerTop Marketing")
+    ];
+
+    const emailParams = new EmailParams()
+      .setFrom(sentFrom)
+      .setTo(recipients)
+      .setSubject("New Newsletter Subscription")
+      .setHtml(`
         <h2>New Newsletter Subscription</h2>
         <p>A new user has subscribed to the newsletter:</p>
         <p><strong>Email:</strong> ${email}</p>
-      `
-    };
+      `);
 
-    // Send email
     console.log('Sending email...');
-    await transporter.sendMail(mailOptions);
+    await mailerSend.email.send(emailParams);
     console.log('Email sent successfully');
 
     return NextResponse.json({ success: true });
