@@ -5,6 +5,15 @@ export async function POST(request: Request) {
   try {
     const { email, recipientEmail } = await request.json();
     console.log('Received subscription request:', { email, recipientEmail });
+    console.log('API Key exists:', !!process.env.MAILERSEND_API_KEY);
+
+    if (!process.env.MAILERSEND_API_KEY) {
+      console.error('MAILERSEND_API_KEY is not set in environment');
+      return NextResponse.json(
+        { error: 'API key configuration error' },
+        { status: 500 }
+      );
+    }
 
     if (!email || !recipientEmail) {
       console.log('Missing required fields');
@@ -18,7 +27,7 @@ export async function POST(request: Request) {
       apiKey: process.env.MAILERSEND_API_KEY || '',
     });
 
-    const sentFrom = new Sender("your-sandbox@sandbox.mailersend.net", "SpinnerTop");
+    const sentFrom = new Sender("marketing@trial-jpzkmgqwnkvg059v.mlsender.net", "SpinnerTop");
     const recipients = [
       new Recipient(recipientEmail, "SpinnerTop Marketing")
     ];
