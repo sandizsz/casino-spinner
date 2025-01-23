@@ -41,7 +41,7 @@ export function NavbarClient({ categories, casinos }: NavbarClientProps) {
             <div className="h-16 w-auto aspect-[2/1] transition-transform duration-300 group-hover:scale-105">
               <Image
                 src="/images/spinnertop.png"
-                alt="Loco Bonus logo"
+                alt="Spinnertop logo"
                 width={160}
                 height={80}
                 className="object-contain w-full h-full"
@@ -106,7 +106,7 @@ export function NavbarClient({ categories, casinos }: NavbarClientProps) {
               <div className="h-16 w-auto aspect-[2/1] transition-transform duration-300 group-hover:scale-105">
                 <Image
                   src="/images/spinnertop.png"
-                  alt="Loco Bonus logo"
+                  alt="Spinnertop logo"
                   width={200}
                   height={100}
                   className="object-contain w-full h-full"

@@ -34,6 +34,8 @@ export default function ClaimButton({ offerUrl, offerTitle, categorySlug, catego
     return offerUrl;
   };
 
+  
+
   return (
     <Link
       href={getFriendlyUrl()}
